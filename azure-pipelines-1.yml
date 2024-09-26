@@ -1,13 +1,4 @@
 # Docker
-- task: Docker@2
-  inputs:
-    containerRegistry: 'demo'
-    repository: 'ebf3kor/demo'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - main
 
@@ -27,8 +18,11 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-  inputs:
-    containerRegistry: 'demo'
-    repository: 'ebf3kor/demo'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+      inputs:
+        containerRegistry: 'demo'
+        repository: 'ebf3kor/demo'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(tag)
+
